@@ -13,16 +13,16 @@ import java.util.Properties;
 public class Main {
     private static IRepository<Pacient> PacientRepository() {
         Properties properties = new Properties();
-        try(InputStream is = new FileInputStream("CabinetStomatologic/src/settings.properties"))
+        try(InputStream is = new FileInputStream("src/settings.properties"))
         {
             properties.load(is);
 
             if(properties.getProperty("PatientsRepository").equals("text")) {
-                return new FileRepository<Pacient>("CabinetStomatologic/src/pacienti.txt", new PacientFactory<Pacient>());
+                return new FileRepository<Pacient>("src/pacienti.txt", new PacientFactory<Pacient>());
             }
 
             else if(properties.getProperty("PatientsRepository").equals("binary"))
-                return new BinaryFileRepo<>("CabinetStomatologic/src/pacienti.bin");
+                return new BinaryFileRepo<>("src/pacienti.bin");
             else if(properties.getProperty("PatientsRepository").equals("runtime")) {
                 Pacient pac1 = new Pacient(1, "Saligny", "Anghel", 23);
                 Pacient pac2 = new Pacient(2, "Tulbure", "Claudiu", 21);
@@ -54,10 +54,10 @@ public class Main {
 
     public static IRepository<Programare> ProgramareRepository() {
         Properties properties = new Properties();
-        try(InputStream is = new FileInputStream("CabinetStomatologic/src/settings.properties")) {
+        try(InputStream is = new FileInputStream("src/settings.properties")) {
             properties.load(is);
             if (properties.getProperty("AppointmentsRepository").equals("binary"))
-                return new BinaryFileRepo<>("CabinetStomatologic/src/appointments.bin");
+                return new BinaryFileRepo<>("src/appointments.bin");
             else if (properties.getProperty("AppointmentsRepository").equals("runtime")) {
                 return new MemoryRepo<>();
 
